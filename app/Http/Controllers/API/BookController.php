@@ -7,13 +7,17 @@ use App\Models\Book;
 use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Cache;
+
+
 
 class BookController extends Controller
 {
-  
+
     public function index()
     {
-        return BookResource::collection(Book::all());
+        $books = Book::paginate(2);
+        return BookResource::collection($books);
     }
 
    
@@ -33,8 +37,15 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
+        $cacheKey = 'book_' . $book->id;
+
+        $book = Cache::remember($cacheKey, 60 * 60, function () use ($book) {
+            return $book;
+        });
+
         return new BookResource($book);
     }
+
 
     public function update(Request $request, Book $book)
     {

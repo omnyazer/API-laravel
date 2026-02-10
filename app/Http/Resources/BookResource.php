@@ -6,13 +6,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookResource extends JsonResource
 {
-    public function toArray($request): array
+    public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
-            'author' => strtoupper($this->author),
+            'author' => $this->author,
             'summary' => $this->summary,
             'isbn' => $this->isbn,
         ];
     }
+
 }
