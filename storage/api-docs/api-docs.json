@@ -1,12 +1,21 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Laravel",
+        "title": "Library API",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Serveur local"
+        }
+    ],
     "paths": {
         "/api/books": {
             "get": {
+                "tags": [
+                    "Books"
+                ],
                 "summary": "Liste des livres",
                 "operationId": "64ce85f06fc87443a16496268e88cddb",
                 "responses": {
@@ -16,6 +25,9 @@
                 }
             },
             "post": {
+                "tags": [
+                    "Books"
+                ],
                 "summary": "Créer un livre",
                 "operationId": "4114213d13c3b8499c6aec21511edb28",
                 "requestBody": {
@@ -43,6 +55,9 @@
         },
         "/api/books/{id}": {
             "get": {
+                "tags": [
+                    "Books"
+                ],
                 "summary": "Afficher un livre",
                 "operationId": "e473ab3a66f0daaa9bf1b70b29dd5288",
                 "parameters": [
@@ -62,6 +77,9 @@
                 }
             },
             "put": {
+                "tags": [
+                    "Books"
+                ],
                 "summary": "Modifier un livre",
                 "operationId": "7341e0ef7ae7c978e0f7ef257d9dbba9",
                 "parameters": [
@@ -81,6 +99,9 @@
                 }
             },
             "delete": {
+                "tags": [
+                    "Books"
+                ],
                 "summary": "Supprimer un livre",
                 "operationId": "b74ac8316831ae82112b04392815bd67",
                 "parameters": [
@@ -99,6 +120,9 @@
         },
         "/api/register": {
             "post": {
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Inscription utilisateur",
                 "operationId": "584a102470c054e585330c05f7da4bfc",
                 "requestBody": {
@@ -125,6 +149,9 @@
         },
         "/api/login": {
             "post": {
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Connexion utilisateur",
                 "operationId": "2526fe2d44c926504aa3663c8f10a15c",
                 "requestBody": {
@@ -150,6 +177,9 @@
         },
         "/api/logout": {
             "post": {
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Déconnexion utilisateur",
                 "operationId": "b9c12342da1bfbec9f02fd4e3667ad52",
                 "responses": {
@@ -162,5 +192,15 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
 }

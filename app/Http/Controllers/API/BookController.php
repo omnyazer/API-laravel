@@ -20,6 +20,7 @@ class BookController extends Controller
     #[OA\Get(
         path: "/api/books",
         summary: "Liste des livres",
+        tags: ["Books"],
         responses: [
             new OA\Response(response: 200, description: "Succès")
         ]
@@ -34,6 +35,7 @@ class BookController extends Controller
     #[OA\Post(
         path: "/api/books",
         summary: "Créer un livre",
+        tags: ["Books"],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
                 example: [
@@ -66,6 +68,7 @@ class BookController extends Controller
     #[OA\Get(
         path: "/api/books/{id}",
         summary: "Afficher un livre",
+        tags: ["Books"],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true)
         ],
@@ -89,6 +92,7 @@ class BookController extends Controller
     #[OA\Put(
         path: "/api/books/{id}",
         summary: "Modifier un livre",
+        tags: ["Books"],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true)
         ],
@@ -120,6 +124,7 @@ class BookController extends Controller
     #[OA\Delete(
         path: "/api/books/{id}",
         summary: "Supprimer un livre",
+        tags: ["Books"],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true)
         ],

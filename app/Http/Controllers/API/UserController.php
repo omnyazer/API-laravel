@@ -10,16 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OA;
 
 
-#[OA\Info(
-    title: "API Laravel",
-    version: "1.0.0"
-)]
 
 class UserController extends Controller
 {
-    #[OA\Post(
+   #[OA\Post(
     path: "/api/register",
     summary: "Inscription utilisateur",
+    tags: ["Auth"],
     requestBody: new OA\RequestBody(
         content: new OA\JsonContent(
             example: [
@@ -60,6 +57,7 @@ class UserController extends Controller
         #[OA\Post(
         path: "/api/login",
         summary: "Connexion utilisateur",
+        tags: ["Auth"],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
                 example: [
@@ -100,6 +98,7 @@ class UserController extends Controller
     #[OA\Post(
     path: "/api/logout",
     summary: "Déconnexion utilisateur",
+    tags: ["Auth"],
     responses: [
         new OA\Response(response: 204, description: "Déconnecté"),
         new OA\Response(response: 401, description: "Non authentifié")
