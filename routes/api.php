@@ -18,11 +18,11 @@ Route::post('/login', [UserController::class, 'login'])
 
 Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
 
-Route::get('/books', [BookController::class, 'index']);
-Route::get('/books/{book}', [BookController::class, 'show']);
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/books', [BookController::class, 'store']);
-    Route::match(['put', 'patch'], '/books/{book}', [BookController::class, 'update']);
-    Route::delete('/books/{book}', [BookController::class, 'destroy']);
+    Route::post('/books', [BookController::class, 'store'])->name('books.store');
+    Route::match(['put', 'patch'], '/books/{book}', [BookController::class, 'update'])->name('books.update');
+    Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
 });
