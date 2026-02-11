@@ -9,10 +9,21 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Cache;
 
+use OpenApi\Attributes as OA;
+
+
 
 
 class BookController extends Controller
 {
+
+    #[OA\Get(
+        path: "/api/books",
+        summary: "Liste des livres",
+        responses: [
+            new OA\Response(response: 200, description: "Succès")
+        ]
+    )]
 
     public function index()
     {
@@ -20,7 +31,25 @@ class BookController extends Controller
         return BookResource::collection($books);
     }
 
-   
+    #[OA\Post(
+        path: "/api/books",
+        summary: "Créer un livre",
+        requestBody: new OA\RequestBody(
+            content: new OA\JsonContent(
+                example: [
+                    "title" => "Livre test",
+                    "author" => "Auteur test",
+                    "summary" => "Résumé test",
+                    "isbn" => "1234567890123"
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(response: 201, description: "Créé"),
+            new OA\Response(response: 422, description: "Erreur validation")
+        ]
+    )]
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -34,6 +63,17 @@ class BookController extends Controller
 
         return new BookResource($book);
     }
+    #[OA\Get(
+        path: "/api/books/{id}",
+        summary: "Afficher un livre",
+        parameters: [
+            new OA\Parameter(name: "id", in: "path", required: true)
+        ],
+        responses: [
+            new OA\Response(response: 200, description: "Succès"),
+            new OA\Response(response: 404, description: "Introuvable")
+        ]
+    )]
 
     public function show(Book $book)
     {
@@ -46,6 +86,17 @@ class BookController extends Controller
         return new BookResource($book);
     }
 
+    #[OA\Put(
+        path: "/api/books/{id}",
+        summary: "Modifier un livre",
+        parameters: [
+            new OA\Parameter(name: "id", in: "path", required: true)
+        ],
+        responses: [
+            new OA\Response(response: 200, description: "Modifié"),
+            new OA\Response(response: 422, description: "Erreur validation")
+        ]
+    )]
 
     public function update(Request $request, Book $book)
     {
@@ -66,6 +117,16 @@ class BookController extends Controller
         return new BookResource($book);
     }
 
+    #[OA\Delete(
+        path: "/api/books/{id}",
+        summary: "Supprimer un livre",
+        parameters: [
+            new OA\Parameter(name: "id", in: "path", required: true)
+        ],
+        responses: [
+            new OA\Response(response: 204, description: "Supprimé")
+        ]
+    )]
 
     public function destroy(Book $book)
     {

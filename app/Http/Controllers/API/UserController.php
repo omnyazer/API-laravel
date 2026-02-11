@@ -7,9 +7,34 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use OpenApi\Attributes as OA;
+
+
+#[OA\Info(
+    title: "API Laravel",
+    version: "1.0.0"
+)]
 
 class UserController extends Controller
 {
+    #[OA\Post(
+    path: "/api/register",
+    summary: "Inscription utilisateur",
+    requestBody: new OA\RequestBody(
+        content: new OA\JsonContent(
+            example: [
+                "name" => "User",
+                "email" => "user@example.com",
+                "password" => "password123"
+            ]
+        )
+    ),
+    responses: [
+        new OA\Response(response: 201, description: "Utilisateur créé"),
+        new OA\Response(response: 422, description: "Erreur validation")
+    ]
+)]
+
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -31,6 +56,23 @@ class UserController extends Controller
             'user' => $user,
         ], 201);
     }
+
+        #[OA\Post(
+        path: "/api/login",
+        summary: "Connexion utilisateur",
+        requestBody: new OA\RequestBody(
+            content: new OA\JsonContent(
+                example: [
+                    "email" => "user@example.com",
+                    "password" => "password123"
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(response: 200, description: "Connexion réussie"),
+            new OA\Response(response: 401, description: "Identifiants invalides")
+        ]
+    )]
 
     public function login(Request $request)
     {
@@ -54,6 +96,15 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
+
+    #[OA\Post(
+    path: "/api/logout",
+    summary: "Déconnexion utilisateur",
+    responses: [
+        new OA\Response(response: 204, description: "Déconnecté"),
+        new OA\Response(response: 401, description: "Non authentifié")
+    ]
+)]
 
     public function logout(Request $request)
     {

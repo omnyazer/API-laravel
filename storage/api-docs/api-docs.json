@@ -1,0 +1,166 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "summary": "Liste des livres",
+                "operationId": "64ce85f06fc87443a16496268e88cddb",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Créer un livre",
+                "operationId": "4114213d13c3b8499c6aec21511edb28",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "title": "Livre test",
+                                "author": "Auteur test",
+                                "summary": "Résumé test",
+                                "isbn": "1234567890123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Créé"
+                    },
+                    "422": {
+                        "description": "Erreur validation"
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "summary": "Afficher un livre",
+                "operationId": "e473ab3a66f0daaa9bf1b70b29dd5288",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    },
+                    "404": {
+                        "description": "Introuvable"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Modifier un livre",
+                "operationId": "7341e0ef7ae7c978e0f7ef257d9dbba9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Modifié"
+                    },
+                    "422": {
+                        "description": "Erreur validation"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Supprimer un livre",
+                "operationId": "b74ac8316831ae82112b04392815bd67",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Supprimé"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "summary": "Inscription utilisateur",
+                "operationId": "584a102470c054e585330c05f7da4bfc",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "User",
+                                "email": "user@example.com",
+                                "password": "password123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "422": {
+                        "description": "Erreur validation"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "Connexion utilisateur",
+                "operationId": "2526fe2d44c926504aa3663c8f10a15c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "email": "user@example.com",
+                                "password": "password123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie"
+                    },
+                    "401": {
+                        "description": "Identifiants invalides"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "summary": "Déconnexion utilisateur",
+                "operationId": "b9c12342da1bfbec9f02fd4e3667ad52",
+                "responses": {
+                    "204": {
+                        "description": "Déconnecté"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    }
+                }
+            }
+        }
+    }
+}
