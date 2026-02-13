@@ -58,7 +58,19 @@ class UserController extends Controller
         path: "/api/login",
         summary: "Connexion utilisateur",
         tags: ["Auth"],
+        parameters: [
+            new OA\Parameter(
+                name: "Accept",
+                in: "header",
+                required: true,
+                schema: new OA\Schema(
+                    type: "string",
+                    example: "application/json"
+                )
+            )
+        ],
         requestBody: new OA\RequestBody(
+            required: true,
             content: new OA\JsonContent(
                 example: [
                     "email" => "user@example.com",
@@ -96,14 +108,26 @@ class UserController extends Controller
     }
 
     #[OA\Post(
-    path: "/api/logout",
-    summary: "Déconnexion utilisateur",
-    tags: ["Auth"],
-    responses: [
-        new OA\Response(response: 204, description: "Déconnecté"),
-        new OA\Response(response: 401, description: "Non authentifié")
-    ]
-)]
+        path: "/api/logout",
+        summary: "Déconnexion utilisateur",
+        tags: ["Auth"],
+        security: [["bearerAuth" => []]],
+        parameters: [
+            new OA\Parameter(
+                name: "Accept",
+                in: "header",
+                required: true,
+                schema: new OA\Schema(
+                    type: "string",
+                    example: "application/json"
+                )
+            )
+        ],
+        responses: [
+            new OA\Response(response: 204, description: "Déconnecté"),
+            new OA\Response(response: 401, description: "Non authentifié")
+        ]
+    )]
 
     public function logout(Request $request)
     {

@@ -11,9 +11,20 @@ use OpenApi\Attributes as OA;
     ),
     servers: [
         new OA\Server(
-            url: "http://localhost:8000/api",
+        url: "http://localhost:8000",
             description: "Serveur local"
         )
     ]
 )]
-class ApiConfig {}
+
+#[OA\SecurityScheme(
+    securityScheme: "bearerAuth",
+    type: "http",
+    scheme: "bearer",
+    bearerFormat: "token",
+    description: "Entrer le token au format : Bearer {token}"
+)]
+
+class ApiConfig
+{
+}

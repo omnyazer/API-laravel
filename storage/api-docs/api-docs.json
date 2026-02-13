@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000/api",
+            "url": "http://localhost:8000",
             "description": "Serveur local"
         }
     ],
@@ -154,7 +154,19 @@
                 ],
                 "summary": "Connexion utilisateur",
                 "operationId": "2526fe2d44c926504aa3663c8f10a15c",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {},
@@ -182,6 +194,17 @@
                 ],
                 "summary": "Déconnexion utilisateur",
                 "operationId": "b9c12342da1bfbec9f02fd4e3667ad52",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "Déconnecté"
@@ -189,7 +212,22 @@
                     "401": {
                         "description": "Non authentifié"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Entrer le token au format : Bearer {token}",
+                "bearerFormat": "token",
+                "scheme": "bearer"
             }
         }
     },

@@ -29,4 +29,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function usesProfessionalEmail(): bool
+    {
+        return str_ends_with($this->email, '@entreprise.com');
+    }
 }
